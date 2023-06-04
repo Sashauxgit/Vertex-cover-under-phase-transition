@@ -1,0 +1,1 @@
+g++ main.cpp hello.cpp -o out.exe
