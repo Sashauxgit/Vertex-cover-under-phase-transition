@@ -26,6 +26,7 @@ public:
     Graph& operator = (Graph&& obj);
     int getVertexCount() const;
     int getEdgeCount() const;
+    std::vector<std::vector<int>> getIncidenceMatrix();
     int getValency(int v) const;
     int getHighDegreeV() const;
     int getHighDegreeV(std::vector<bool> tags) const;

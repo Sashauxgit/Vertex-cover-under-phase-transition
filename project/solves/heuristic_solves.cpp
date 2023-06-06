@@ -34,47 +34,23 @@ int greedy_algorithm(Graph G) { // Жадный алгоритм
 }
 
 int linear_algorithm(Graph G) { // Линейный алгоритм
-    int colSizeA=6;  //should initialise columns size in A
-    int rowSizeA = 3;  //should initialise columns row in A[][] vector
-
-    float C[]= {1,1,1,0,0,0,};  //should initialis the c arry here
-    float B[]={-1,-1,-1};  // should initialis the b array here
+    int colSizeA = G.getVertexCount();  //should initialise columns size in A
+    int rowSizeA = G.getEdgeCount();  //should initialise columns row in A[][] vector
 
 
+    std::vector <std::vector<float> > A(rowSizeA, std::vector<float>(colSizeA, 0));
 
-    float a[3][6] = {    //should intialis the A[][] array here
-                   { -1,  -1,  0, 1, 0, 0},
-                   { -1,  0,  -1, 0, 1, 0},
-                   { 0,  -1,  -1, 0, 0, 1}
-             };
+    std::vector<float> B(rowSizeA, -1);
+    std::vector<float> C(colSizeA, 1);
 
+    for(int i=0;i<rowSizeA;i++){         //make a vector from given array
+        for(int j=0; j<colSizeA;j++){
+            A[i][j] = - (float)G.getIncidenceMatrix()[i][j];
+        }
+    }
 
-        std::vector <std::vector<float> > vec2D(rowSizeA, std::vector<float>(colSizeA, 0));
-
-        std::vector<float> b(rowSizeA,0);
-        std::vector<float> c(colSizeA,0);
-
-
-
-
-       for(int i=0;i<rowSizeA;i++){         //make a vector from given array
-            for(int j=0; j<colSizeA;j++){
-                vec2D[i][j] = a[i][j];
-            }
-       }
-
-       for(int i=0;i<rowSizeA;i++){
-            b[i] = B[i];
-       }
-
-        for(int i=0;i<colSizeA;i++){
-            c[i] = C[i];
-       }
-
-
-      // hear the make the class parameters with A[m][n] vector b[] vector and c[] vector
-      Simplex simplex(vec2D,b,c);
-      simplex.CalculateSimplex();
+    Simplex simplex(A,B,C);
+    simplex.CalculateSimplex();
 }
 
 int developed_algorithm(Graph G) { // Новый разработанный эвристический алгоритм

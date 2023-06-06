@@ -402,3 +402,7 @@ Graph::~Graph(){
     }
     incidence_matrix.clear();
 }
+
+std::vector<std::vector<int>> Graph::getIncidenceMatrix() {
+    return this->incidence_matrix;
+}
